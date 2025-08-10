@@ -1,0 +1,7 @@
+Name,Join Date,Salary,Department,Extra Column
+ Alice ,2024/01/05,50000,HR,
+Bob,05-02-2024,,Finance,
+,"March 3, 2024","45,000",Finance,
+Charlie,, 60000 ,,
+David,2024-13-05,NaN,,
+ Eve ,2024.05.10,55000,IT,

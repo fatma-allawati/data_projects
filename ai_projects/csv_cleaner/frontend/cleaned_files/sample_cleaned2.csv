@@ -1,0 +1,7 @@
+name,join_date,salary,department
+Alice,2024-01-05,50000.0,HR
+Bob,2024-05-02,,Finance
+,2024-03-03,45000.0,Finance
+Charlie,,60000.0,
+David,,,
+Eve,2024-05-10,55000.0,IT
