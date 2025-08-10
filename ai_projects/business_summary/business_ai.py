@@ -44,7 +44,7 @@ if uploaded_file:
 
         if st.button("Generate AI Summary"):
             with st.spinner("Generate Summary ..."):
-                client = OpenAI(api_key="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")
+                client = OpenAI(api_key="API_KEY") #Add your API key
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
