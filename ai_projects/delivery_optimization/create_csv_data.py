@@ -25,4 +25,4 @@ df = pd.DataFrame(data)
 df['delivery_window_end'] = df['delivery_window_start'] + pd.to_timedelta(df['delivery_duration_estimate'], unit = 'm')
 
 #Save in CSV
-df.to_csv('C:\\Users\\fatoo\OneDrive\Desktop\\ai_projects\\delivery_optimization\\data\\delivery_data.csv', index=False)
+df.to_csv('SAVE_CSV_PATH', index=False) #Add path to save generated CSV

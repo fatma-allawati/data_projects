@@ -2,6 +2,13 @@
 import pandas as pd
 import os 
 
+"""Cleans a CSV DataFrame by:
+    1. Removing empty rows and columns
+    2. Normalizing column names (lowercase, underscores, no spaces)
+    3. Stripping extra spaces from string values
+    4. Removing duplicate rows
+    5. Attempting to convert string columns to datetime (if applicable) """
+
 def clean_csv(df: pd.DataFrame) -> pd.DataFrame:
     #Drop empty rows and columns
     df.dropna(how='all', inplace=True)

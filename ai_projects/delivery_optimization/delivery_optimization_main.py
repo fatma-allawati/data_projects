@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv('C:\\Users\\fatoo\OneDrive\Desktop\\ai_projects\\delivery_optimization\\data\\delivery_data.csv')
+df = pd.read_csv('YOUR_CSV_PATH') #Add CSV path
 
 #Clustering delivery locations using KMeans
 coords = df[['customer_lat','customer_lon']]
@@ -22,7 +22,7 @@ ax.set_ylabel('Latitude')
 plt.tight_layout()
 
 #Save figure
-plot_path = "C:\\Users\\fatoo\\OneDrive\\Desktop\\ai_projects\\delivery_optimization\\images\\delivery_clusters.png"
+plot_path = "SAVE_FIGURE_PATH" #Save your figure path
 fig.savefig(plot_path)
 plot_path
 
@@ -44,7 +44,7 @@ df['hour'] = df['delivery_window_start'].dt.hour
 
 #Haversine formula
 def haversine(lat1, lon1, lat2, lon2):
-    R = 6371 #Earth Radians 
+    R = 6371 #Earth Radians in KM
     dlat = radians(lat2 - lat1)
     dlon = radians(lon2 - lon1)
     a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
@@ -53,9 +53,11 @@ def haversine(lat1, lon1, lat2, lon2):
 
 #Compute distance between warehouse and customer
 warehouse_lat, warehouse_lon = 23.6, 58.5  # replace with your real warehouse location
+
+#Calculate distance from warehouse to customer for each row
 df['distance_km'] = df.apply(lambda row: haversine(warehouse_lat, warehouse_lon, row['customer_lat'], row['customer_lon']), axis=1)
 
-
+#Define traffic levels based on delivery hour
 def estimate_traffic(hour):
     if 7 <= hour <= 9 or 16 <= hour <= 18:
         return 'High'
@@ -66,7 +68,7 @@ def estimate_traffic(hour):
 
 df['traffic_level'] = df['hour'].apply(estimate_traffic)
 
-# Optional: Convert to numeric if needed
+#Optional: Convert map traffic levels to numeric if needed for modeling
 traffic_map = {'Low': 1, 'Medium': 2, 'High': 3}
 df['traffic_level'] = df['traffic_level'].map(traffic_map)
 
@@ -88,7 +90,7 @@ model = XGBRegressor(
 )
 model.fit(x_train,y_train)
 
-#Predict and evaluate
+#Calculate root mean squared error (RMSE) to evaluate model performance
 y_pred = model.predict(x_test)
 rmse = np.sqrt(mean_squared_error(y_test,y_pred))
 print(f"Model RMSE: {rmse:.2f}")

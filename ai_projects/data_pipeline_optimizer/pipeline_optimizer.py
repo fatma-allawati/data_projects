@@ -16,6 +16,8 @@ from sklearn.metrics import f1_score, make_scorer
 import warnings
 warnings.filterwarnings("ignore")
 
+#Find the best sequence of data preprocessing steps that improves classification model performance on a synthetic dataset.
+
 random_seed = 42
 random.seed(random_seed)
 np.random.seed(random_seed)
@@ -68,7 +70,7 @@ def generate_dirty_dataset(n_samples=1000, n_numric=6, n_categorical=2, missing_
     return df 
 
 
-#2. Transformers
+#2. Transformers - Data cleaning
 class ColumnSelector(BaseEstimator, TransformerMixin):
     def __init__(self, cols):
         self.cols = cols
